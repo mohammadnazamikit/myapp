@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import Cards from "./Cards"
 
 const Movies = () => {
@@ -13,11 +14,14 @@ const Movies = () => {
         fetching()
     },[])
 
+    const location = useLocation()
+
    const fetching=()=>{
     fetch(`http://www.omdbapi.com/?apikey=${api}&s=${name}`)
     .then(Response => Response.json())
     .then(data =>{
         setMovies(data.Search)
+        console.log(location)
     }
         )
     }

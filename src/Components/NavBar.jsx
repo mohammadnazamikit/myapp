@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Component} from "react";
 import { Image, NavLink } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
@@ -11,9 +12,18 @@ import { Link, useLocation } from "react-router-dom";
 
 
 
-const NavBar=()=> {
+const NavBar =(props)=> {
+
+  const [buttonSearch, setButtonSearch] = useState(null)
+  
 
   const location = useLocation()
+
+  const clicking =()=>{
+    props.tosetmovie(buttonSearch)
+    console.log("happened")
+   
+  }
   
            return(
              <Navbar bg="light" expand="lg" className="bg-dark text-primary">
@@ -33,20 +43,20 @@ const NavBar=()=> {
                   <Nav.Link href="#action1" className="text-white" >Movies</Nav.Link>
                 </Nav>
                <Nav className="ml-auto">
-                <Nav.Link href="#" className="text-white" > <FaSearch/></Nav.Link>
-                <Nav.Link href="#" className="text-white">KIDS</Nav.Link>
-                <Nav.Link href="#" className="text-white"><FaBell/></Nav.Link>
-                <NavDropdown  title={<Image src="../Components/" className="m-auto"/>} id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                action
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-               action
-              </NavDropdown.Item>
-            </NavDropdown>
+               <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              value={buttonSearch}
+              onChange={(e)=>{
+                setButtonSearch(e.target.value)
+              }}
+             
+            />
+            <Button onClick={()=>{clicking()}} variant="outline-success">Search</Button>
+          </Form>
                 </Nav>
               </Navbar.Collapse>
             </Container>

@@ -13,17 +13,24 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [movie,setMovie]= useState(null)
+  
+  
+ const handlemovie= toset =>{
+    setMovie(toset)
+  }
 
-  useEffect(()=>{
+
+
+  /* useEffect(()=>{
     fetch()
 
-  },[])
+  },[]) */
 
   return (
    
     <div className="App">
     <BrowserRouter>
-    <NavBar/>
+    <NavBar tosetmovie={handlemovie}/>
     <Routes>
       <Route path='/' element={<Movies/>} />
       <Route path='/tv-shows' element={<TVShow></TVShow>} />
